@@ -1,0 +1,21 @@
+customer_id,campaign,impressions,clicks,sales,converted
+1,Search - Brand,1200,120,500,1
+2,Search - Brand,900,80,0,0
+3,Facebook Prospecting,3000,60,0,0
+4,Facebook Prospecting,2500,75,0,0
+5,Email Nurture,800,40,0,0
+6,Email Nurture,850,55,200,1
+7,Referral Program,100,20,100,1
+8,Referral Program,120,18,0,0
+9,Google Display,5000,50,0,0
+10,Google Display,5200,52,0,0
+11,LinkedIn ABM,1000,40,0,0
+12,LinkedIn ABM,1050,42,0,0
+13,Search - NonBrand,2200,66,0,0
+14,Search - NonBrand,2400,72,0,0
+15,Webinar Series,400,80,0,0
+16,Webinar Series,420,90,300,1
+17,Events,50,10,0,0
+18,Events,60,12,0,0
+19,Partner Co-Marketing,150,25,0,0
+20,Partner Co-Marketing,160,22,0,0

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MarketMind – Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="{{ url_for('index') }}">MarketMind</a>
+    </div>
+  </nav>
+
+  <main class="container py-4">
+    <div class="row g-4">
+      <div class="col-12 col-lg-4">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <h5 class="card-title">Key Metrics</h5>
+            <ul class="list-unstyled mb-0">
+              <li><strong>Total Sales:</strong> {{ analytics.total_sales if analytics.total_sales is not none else 'N/A' }}</li>
+              <li><strong>Conversion Rate:</strong> {% if analytics.conversion_rate is not none %}{{ (analytics.conversion_rate * 100) | round(1) }}%{% else %}N/A{% endif %}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-8">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <h5 class="card-title">AI-Generated Insights</h5>
+            {% if ai_insights %}
+            <ul>
+              {% for insight in ai_insights %}
+                <li>{{ insight }}</li>
+              {% endfor %}
+            </ul>
+            {% else %}
+              <p class="text-muted">No insights available.</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Top Campaigns</h5>
+            {% if top_campaigns_table %}
+              <div class="table-responsive">
+                <table class="table table-sm table-striped">
+                  <thead>
+                    <tr>
+                      {% for k in top_campaigns_table[0].keys() %}
+                        <th>{{ k|title }}</th>
+                      {% endfor %}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for row in top_campaigns_table %}
+                      <tr>
+                        {% for v in row.values() %}
+                          <td>{{ v }}</td>
+                        {% endfor %}
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            {% else %}
+              <p class="text-muted mb-0">No campaign information detected in dataset.</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Predicted Conversion Probability (sample)</h5>
+            {% if predictions_table %}
+              <div class="table-responsive">
+                <table class="table table-sm table-striped">
+                  <thead>
+                    <tr>
+                      {% for k in predictions_table[0].keys() %}
+                        <th>{{ k|title }}</th>
+                      {% endfor %}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for row in predictions_table %}
+                      <tr>
+                        {% for v in row.values() %}
+                          <td>{{ v }}</td>
+                        {% endfor %}
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            {% else %}
+              <p class="text-muted mb-0">Model not available or insufficient features/labels in dataset.</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="text-center text-muted py-4">
+    <small>MarketMind – Generative AI Powered Sales & Marketing Intelligence</small>
+  </footer>
+</body>
+</html>

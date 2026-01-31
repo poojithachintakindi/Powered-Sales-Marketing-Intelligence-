@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MarketMind – AI Sales & Marketing Intelligence</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">MarketMind</a>
+    </div>
+  </nav>
+
+  <main class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="alert alert-warning" role="alert">
+              {{ messages[0] }}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h1 class="h3 mb-3">Upload your sales & marketing CSV</h1>
+            <p class="text-muted">Supported: CSV only. Include columns like sales, converted, campaign, impressions, clicks.</p>
+            <form action="{{ url_for('dashboard') }}" method="post" enctype="multipart/form-data">
+              <div class="mb-3">
+                <input class="form-control" type="file" name="file" accept=".csv" required>
+              </div>
+              <button class="btn btn-primary" type="submit">Analyze</button>
+              <a class="btn btn-outline-secondary" href="{{ url_for('static', filename='sample_data/marketmind_sample.csv') }}">Download sample CSV</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="text-center text-muted py-4">
+    <small>MarketMind – Generative AI Powered Sales & Marketing Intelligence</small>
+  </footer>
+</body>
+</html>
